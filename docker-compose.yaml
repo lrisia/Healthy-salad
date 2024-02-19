@@ -1,0 +1,15 @@
+name: healthy-salad
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    image: healthy-salad:0.0.2
+    ports:
+      - '${SERVER_PORT}:${SERVER_PORT}'
+    restart: always
+    # depends_on:
+    #   - mysql
+    #   - mongo
+    env_file: .env
