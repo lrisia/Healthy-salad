@@ -1,1 +1,3 @@
 # Healthy salad
+
+## Installation
