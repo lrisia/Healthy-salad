@@ -16,3 +16,8 @@ python src/app.py <COMMAND>
 ```bash
 route-list
 ```
+
+- Start api server
+```bash
+api-start
+```
