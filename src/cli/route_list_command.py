@@ -10,7 +10,7 @@ class RouteListCommand(Command):
   
     def execute(self):
         server = Server()
-        app = server.start(5000, debug=False)
+        app = server.start(8001, debug=False)
         
         with app.app_context(), app.test_request_context():
             for rule in app.url_map.iter_rules():

@@ -4,6 +4,6 @@ from api.controllers.api_route_interface import ApiRoute
 
 class ModelPostRoute(ApiRoute):
     def register(self, server: Flask):
-        @server.route('/predict', methods=['POST'])
+        @server.route('/model/predict', methods=['GET'])
         def model_post():
-            return "ok", 200
+            return "This should be POST for send image", 200

@@ -25,11 +25,10 @@ class _Config:
         
     def __get_environment(self) -> str:
         environment = os.environ.get("ENVIRONMENT")
-        if environment is None:
-            raise EnvExcept("ENVIRONMENT is not set")
-        elif environment not in ["development", "production"]:
-            raise EnvExcept("ENVIRONMENT is not valid")
-        return environment
+        if environment == "development":
+            return environment
+        return "production"
         
 def get_config():
+    
     return _Config()
