@@ -1,11 +1,11 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
   id: Build
-  args: ['build', '-t', 'gcr.io/$REPO_NAME:$TAG_NAME', '.']
+  args: ['build', '-t', 'asia.gcr.io/$REPO_NAME:$TAG_NAME', '.']
 
 - name: 'gcr.io/cloud-builders/docker'
   id: Push
-  args: ['push', 'gcr.io/$REPO_NAME:$TAG_NAME']
+  args: ['push', 'asia.gcr.io/$REPO_NAME:$TAG_NAME']
 
 - name: 'gcr.io/cloud-builders/gcloud'
   id : Deploy to Cloud Run
