@@ -10,7 +10,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN adduser --system --no-create-home python
 USER python
 
-ADD --chown=user:python ["src", "/app/src"]
+ADD --chown=python:python ["src", "/app/src"]
 
 EXPOSE 8000
 
