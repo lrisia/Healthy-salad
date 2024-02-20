@@ -6,3 +6,7 @@
 ```python
 pip install -r requirements.txt
 ```
+3. Run the application
+```python
+python src/app.py <COMMAND>
+```
