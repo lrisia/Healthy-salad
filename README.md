@@ -10,3 +10,9 @@ pip install -r requirements.txt
 ```python
 python src/app.py <COMMAND>
 ```
+
+## Usage
+- To get the list of available commands
+```python
+python src/app.py
+```
