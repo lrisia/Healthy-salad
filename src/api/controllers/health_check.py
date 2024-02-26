@@ -6,6 +6,6 @@ class HealthCheckRoute(ApiRoute):
     def register(self, server: Flask):
         @server.route('/healthcheck', methods=['GET'])
         def health_check():
-            return 'OK', 200
+            return 'eiei', 200
           
           
