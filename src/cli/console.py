@@ -8,9 +8,10 @@ def console():
     pass
   
 @console.command()
-def api_start():
+@click.option('-N', '--ngrok', default=False, is_flag=True, type=bool, help='Use this option to start the server with ngrok ingress.')
+def api_start(ngrok: bool):
     server_start_command = ApiServerStartCommand()
-    server_start_command.execute()
+    server_start_command.execute(ngrok)
       
 @console.command()
 def route_list():

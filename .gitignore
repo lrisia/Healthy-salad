@@ -263,5 +263,6 @@ $RECYCLE.BIN/
 *.lnk
 
 /google-cloud-sdk/
+/volumes
 
 # End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode,virtualenv,macos,windows

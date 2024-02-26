@@ -8,4 +8,3 @@ class HealthCheckRoute(ApiRoute):
         def health_check():
             return 'OK', 200
           
-          
