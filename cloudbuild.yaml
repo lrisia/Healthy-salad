@@ -1,13 +1,13 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
   id: Build
-  args: ['build', '-t', 'gcr.io/$REPO_NAME:$TAG_NAME', '.']
+  args: ['build', '-t', 'asia.gcr.io/$PROJECT_ID/$REPO_NAME/healthy-salad:$TAG_NAME', '.']
 
 - name: 'gcr.io/cloud-builders/docker'
   id: Push
-  args: ['push', 'gcr.io/$REPO_NAME:$TAG_NAME']
+  args: ['push', 'asia.gcr.io/$PROJECT_ID/$REPO_NAME/healthy-salad:$TAG_NAME']
 
 - name: 'gcr.io/cloud-builders/gcloud'
   id : Deploy to Cloud Run
-  args: ['run', 'deploy', 'healthy-salad', '--image', 'asia.gcr.io/$REPO_NAME:$TAG_NAME', '--region', 
+  args: ['run', 'deploy', 'healthy-salad', '--image', 'asia.gcr.io/$PROJECT_ID/$REPO_NAME/healthy-salad:$TAG_NAME', '--region', 
           'asia-southeast1', '--platform', 'managed', '--allow-unauthenticated']
