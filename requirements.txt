@@ -3,3 +3,4 @@ Werkzeug==3.0.1
 python-dotenv==1.0.1
 line-bot-sdk==3.9.0
 ngrok==1.0.0
+flask-openapi3==3.0.2

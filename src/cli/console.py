@@ -3,17 +3,27 @@ import click
 from cli.route_list_command import RouteListCommand
 from cli.server_start_command import ApiServerStartCommand
 
+
 @click.group()
-def console():
+def console() -> None:
     pass
-  
+
+
 @console.command()
-@click.option('-N', '--ngrok', default=False, is_flag=True, type=bool, help='Use this option to start the server with ngrok ingress.')
-def api_start(ngrok: bool):
+@click.option(
+    "-N",
+    "--ngrok",
+    default=False,
+    is_flag=True,
+    type=bool,
+    help="Use this option to start the server with ngrok ingress.",
+)
+def api_start(ngrok: bool) -> None:
     server_start_command = ApiServerStartCommand()
     server_start_command.execute(ngrok)
-      
+
+
 @console.command()
-def route_list():
+def route_list() -> None:
     route_list_command = RouteListCommand()
     route_list_command.execute()
