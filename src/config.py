@@ -25,7 +25,8 @@ class _Config:
     def _required_env(self, env: str) -> str:
         value = os.environ.get(env)
         if value is None:
-            raise EnvExcept(f"{env} is not set.")
+            # raise EnvExcept(f"{env} is not set.")
+            return ""
         return value
 
     def _get_environment(self) -> str:
