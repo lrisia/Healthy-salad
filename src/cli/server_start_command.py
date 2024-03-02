@@ -1,10 +1,10 @@
 import ngrok
 from api.server import Server
-from cli.command_interface import Command
+from cli.command_interface import CommandInterface
 from config import get_config
 
 
-class ApiServerStartCommand(Command):
+class ApiServerStartCommand(CommandInterface):
 
     def execute(self, ngrok_ingress: bool):
         app = Server()

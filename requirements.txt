@@ -4,3 +4,4 @@ python-dotenv==1.0.1
 line-bot-sdk==3.9.0
 ngrok==1.0.0
 flask-openapi3==3.0.2
+google-cloud-aiplatform==1.43.0

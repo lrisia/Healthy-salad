@@ -1,4 +1,5 @@
 import click
+from cli.playground_command import PlaygroundCommand
 
 from cli.route_list_command import RouteListCommand
 from cli.server_start_command import ApiServerStartCommand
@@ -7,6 +8,12 @@ from cli.server_start_command import ApiServerStartCommand
 @click.group()
 def console() -> None:
     pass
+
+
+@console.command()
+def playground() -> None:
+    playground_command = PlaygroundCommand()
+    playground_command.execute()
 
 
 @console.command()

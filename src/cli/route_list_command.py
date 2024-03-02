@@ -4,10 +4,10 @@ import threading
 from wsgiref.simple_server import make_server
 from flask import url_for
 from api.server import Server
-from cli.command_interface import Command
+from cli.command_interface import CommandInterface
 
 
-class RouteListCommand(Command):
+class RouteListCommand(CommandInterface):
 
     def execute(self):
         server = Server()
