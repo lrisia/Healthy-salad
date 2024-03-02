@@ -11,6 +11,9 @@ class _Config:
 
     LINE_CHANNEL_SECRET: str
     LINE_LINE_CHANNEL_ACCESS_TOKEN: str
+    
+    GCP_PROJECT_NUMBER: str
+    GCP_ENDPOINT_ID: str
 
     def __init__(self):
         load_dotenv()
@@ -21,11 +24,14 @@ class _Config:
         self.LINE_LINE_CHANNEL_ACCESS_TOKEN = self._required_env(
             "LINE_CHANNEL_ACCESS_TOKEN"
         )
+        self.GCP_PROJECT_NUMBER = self._required_env("GCP_PROJECT_NUMBER")
+        self.GCP_ENDPOINT_ID = self._required_env("GCP_ENDPOINT_ID")
 
     def _required_env(self, env: str) -> str:
         value = os.environ.get(env)
         if value is None:
             # raise EnvExcept(f"{env} is not set.")
+            print(f"{env} is not set.")
             return ""
         return value
 
