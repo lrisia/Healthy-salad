@@ -27,6 +27,7 @@ class PlaygroundCommand(CommandInterface):
 
         predict_img_path = (
             "/content/drive/MyDrive/Drive/CS Project/Dataset_jpg/leaf_blight/IMG_3363_jpeg.rf.7ed73adef4cce87df302fa58de73260c.jpg"
+            # "/Users/irisialightsky/General/Dev/healthy-salad/example_image.jpg"
         )
         predict_img = import_image(predict_img_path)
 
@@ -39,4 +40,4 @@ class PlaygroundCommand(CommandInterface):
         )
 
         # Print the predicted class
-        print(prediction_result)
+        print(prediction_result[0])

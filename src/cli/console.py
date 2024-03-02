@@ -11,7 +11,7 @@ def console() -> None:
 
 
 @console.command()
-def playground() -> None:
+def pg() -> None:
     playground_command = PlaygroundCommand()
     playground_command.execute()
 

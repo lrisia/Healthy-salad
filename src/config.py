@@ -31,10 +31,7 @@ class _Config:
         value = os.environ.get(env)
         if value is None:
             # raise EnvExcept(f"{env} is not set.")
-<<<<<<< HEAD
             print(f"{env} is not set.")
-=======
->>>>>>> e267972 (fix env exception not set when deploy to gcp)
             return ""
         return value
 

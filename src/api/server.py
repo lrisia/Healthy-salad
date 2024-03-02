@@ -6,10 +6,6 @@ from werkzeug.exceptions import NotFound
 from api.controllers.health_check_route import HealthCheckRoute
 from flask_openapi3 import Info
 from flask_openapi3 import OpenAPI, APIBlueprint
-from linebot.v3 import WebhookHandler
-from linebot.v3.messaging import (
-    Configuration,
-)
 from api.controllers.line.line_webhook import LineWebhookPostRoute
 from api.routes import RouteList
 
