@@ -6,3 +6,4 @@ ngrok==1.0.0
 flask-openapi3==3.0.2
 google-cloud-aiplatform==1.43.0
 opencv-python==4.9.0.80
+libgl1
