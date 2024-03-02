@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class Command(ABC):
+class CommandInterface(ABC):
 
     @abstractmethod
     def execute(self) -> None:
