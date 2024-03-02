@@ -28,7 +28,7 @@ class _Config:
         )
         self.GCP_PROJECT_NUMBER = self._required_env("GCP_PROJECT_NUMBER")
         self.GCP_ENDPOINT_ID = self._required_env("GCP_ENDPOINT_ID")
-        self.ROOT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
+        self.ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
     def _required_env(self, env: str) -> str:
         value = os.environ.get(env)
