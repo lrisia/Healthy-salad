@@ -1,3 +1,4 @@
+import os
 import cv2
 import numpy as np
 from cli.command_interface import CommandInterface
@@ -25,13 +26,12 @@ class PlaygroundCommand(CommandInterface):
             result = endpoint.predict(instances=[instances])
             return result.predictions
 
+        config = get_config()
         predict_img_path = (
-            "/content/drive/MyDrive/Drive/CS Project/Dataset_jpg/leaf_blight/IMG_3363_jpeg.rf.7ed73adef4cce87df302fa58de73260c.jpg"
-            # "/Users/irisialightsky/General/Dev/healthy-salad/example_image.jpg"
+            os.path.join(config.ROOT_DIR, "example_image.jpg")
         )
         predict_img = import_image(predict_img_path)
 
-        config = get_config()
         # Make predictions using the custom trained model
         prediction_result = predict_custom_trained_model(
             instances=predict_img.tolist(),

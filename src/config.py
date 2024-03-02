@@ -11,9 +11,11 @@ class _Config:
 
     LINE_CHANNEL_SECRET: str
     LINE_LINE_CHANNEL_ACCESS_TOKEN: str
-    
+
     GCP_PROJECT_NUMBER: str
     GCP_ENDPOINT_ID: str
+
+    ROOT_DIR: str
 
     def __init__(self):
         load_dotenv()
@@ -26,6 +28,7 @@ class _Config:
         )
         self.GCP_PROJECT_NUMBER = self._required_env("GCP_PROJECT_NUMBER")
         self.GCP_ENDPOINT_ID = self._required_env("GCP_ENDPOINT_ID")
+        self.ROOT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 
     def _required_env(self, env: str) -> str:
         value = os.environ.get(env)
