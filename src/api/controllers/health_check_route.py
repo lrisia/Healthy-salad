@@ -14,7 +14,7 @@ class HealthCheckRoute(ApiRouteInterface):
             description="Health check",
             responses={
                 200: DefaultResponse,
-                500: ErrorResponse,
+                # 500: ErrorResponse,
             }
         )
         def health_check():

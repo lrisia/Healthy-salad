@@ -1,16 +1,26 @@
 import os
 import cv2
 import numpy as np
+import requests
 from cli.command_interface import CommandInterface
 from google.cloud import aiplatform
 from config import get_config
+from model.gcp import GCPAuthToken
+import google.auth
 
 
 class PlaygroundCommand(CommandInterface):
 
     def execute(self):
         print("Welcome to playground!")
-        aiplatform.init(location="asia-southeast1")
+        credentials, project = google.auth.default()
+        aiplatform.init(location="asia-southeast1",
+                        credentials=credentials)
+        
+        # url = "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token"
+        # headers = {"Metadata-Flavor": "Google"}
+        # gcp_response: GCPAuthToken = requests.get(url, headers=headers).json()
+        
 
         def import_image(path: str, image_size: int = 224):
             img = cv2.resize(cv2.imread(path), (image_size, image_size))
