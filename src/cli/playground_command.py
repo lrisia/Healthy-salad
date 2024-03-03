@@ -7,16 +7,18 @@ from google.cloud import aiplatform
 from config import get_config
 from model.gcp import GCPAuthToken
 import google.auth
+import google.auth.transport.requests
+from google.auth import compute_engine
 
 
 class PlaygroundCommand(CommandInterface):
 
     def execute(self):
         print("Welcome to playground!")
-        credentials, project = google.auth.default()
-        print(credentials, project)
+
+        cred = compute_engine.Credentials()
         aiplatform.init(location="asia-southeast1",
-                        credentials=credentials)
+                        credentials=cred)
         
         # url = "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token"
         # headers = {"Metadata-Flavor": "Google"}
