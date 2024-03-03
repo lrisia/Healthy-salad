@@ -15,7 +15,7 @@ from api.routes import ApiRouteInterface
 from model.line_connection import LineConnection
 
 
-class LineWebhookPostRoute(ApiRouteInterface):
+class PostLineWebhookRoute(ApiRouteInterface):
     __line_connection: LineConnection
 
     def __init__(self, access_token: str, channel_secret: str):

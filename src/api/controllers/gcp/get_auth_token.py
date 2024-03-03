@@ -4,7 +4,7 @@ from api.routes import ApiRouteInterface
 from flask_openapi3 import APIBlueprint
 
 
-class ModelPostRoute(ApiRouteInterface):
+class GetAuthTokenRoute(ApiRouteInterface):
     def register(self, app: APIBlueprint):
         @app.get("/auth/token")
         def callback():
