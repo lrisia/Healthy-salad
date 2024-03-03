@@ -17,4 +17,5 @@ ADD --chown=python:nogroup ["src", "/app/src"]
 EXPOSE 8000
 
 # CMD gunicorn --bind :$SERVER_PORT --workers 1 --threads 8 --timeout 0 main:app
-CMD [ "python3", "src/index.py", "pg"]
+ENTRYPOINT [ "python3" ]
+CMD ["src/index.py", "api-start"]
