@@ -14,6 +14,7 @@ class PlaygroundCommand(CommandInterface):
     def execute(self):
         print("Welcome to playground!")
         credentials, project = google.auth.default()
+        print(credentials, project)
         aiplatform.init(location="asia-southeast1",
                         credentials=credentials)
         
