@@ -22,12 +22,13 @@ class PlaygroundCommand(CommandInterface):
 
         url = "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token"
         headers = {"Metadata-Flavor": "Google"}
-        response: GCPAuthToken = requests.get(url, headers=headers).json()
+        response = requests.get(url, headers=headers).json()
+        credentials = GCPAuthToken(**response)
 
         print(response)
 
         aiplatform.init(
-            location="asia-southeast1", credentials=Credentials(response.access_token)
+            location="asia-southeast1", credentials=Credentials(credentials.access_token)
         )
 
         def import_image(path: str, image_size: int = 224):
