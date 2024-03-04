@@ -15,6 +15,12 @@ class _Config:
     GCP_PROJECT_NUMBER: str
     GCP_ENDPOINT_ID: str
 
+    GCP_PROJECT_NUMBER: str
+    GCP_ENDPOINT_ID: str
+    FIRESTORE_SERVICE_ACCOUNT: str
+
+    ROOT_DIR: str
+
     def __init__(self):
         load_dotenv()
         self.ENVIRONMENT = self._get_environment()
@@ -26,6 +32,8 @@ class _Config:
         )
         self.GCP_PROJECT_NUMBER = self._required_env("GCP_PROJECT_NUMBER")
         self.GCP_ENDPOINT_ID = self._required_env("GCP_ENDPOINT_ID")
+        self.FIRESTORE_SERVICE_ACCOUNT = self._required_env("FIRESTORE_SERVICE_ACCOUNT")
+        self.ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 
     def _required_env(self, env: str) -> str:
         value = os.environ.get(env)
