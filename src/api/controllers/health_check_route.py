@@ -13,8 +13,9 @@ class HealthCheckRoute(ApiRouteInterface):
             description="Health check",
             responses={
                 200: DefaultResponse,
-                # 500: ErrorResponse,
-            }
+            },
         )
-        def health_check():
-            return make_response({"message": "Healthy"}, HTTPStatus.OK)
+        def healthcheck():
+            return make_response(
+                DefaultResponse(message="Healthy").model_dump(), HTTPStatus.OK
+            )

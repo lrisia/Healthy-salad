@@ -14,22 +14,20 @@ from api.routes import ApiRouteInterface
 from model.line_connection import LineConnection
 
 
-class PostLineWebhookRoute(ApiRouteInterface):
+class LineWebhookPostRoute(ApiRouteInterface):
     __line_connection: LineConnection
 
-    def __init__(self, access_token: str, channel_secret: str):
-        self.__line_connection = LineConnection(access_token, channel_secret)
+    def __init__(self, line_connection: LineConnection):
+        self.__line_connection = line_connection
 
     def register(self, app):
-        @app.post("/callback")
-        def callback():
+        @app.post("/webhook")
+        def line_webhook_post():
             # get X-Line-Signature header value
             signature = request.headers["X-Line-Signature"]
-
             # get request body as text
             body = request.get_data(as_text=True)
             print("Request body: " + body)
-
             # handle webhook body
             try:
                 self.__line_connection.handler.handle(body, signature)

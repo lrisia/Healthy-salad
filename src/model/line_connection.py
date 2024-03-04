@@ -5,7 +5,7 @@ from linebot.v3.messaging import (
 )
 
 
-class LineConnection():
+class LineConnection:
     configuration: Configuration
     handler: WebhookHandler
 

@@ -2,7 +2,8 @@ import cv2
 import numpy as np
 from cli.command_interface import CommandInterface
 from google.cloud import aiplatform
-from config import get_config
+from model.config import get_config
+from model.container import get_container
 
 
 class PlaygroundCommand(CommandInterface):
@@ -10,8 +11,8 @@ class PlaygroundCommand(CommandInterface):
     def execute(self):
         print("Welcome to playground!")
 
-        config = get_config()
-
+        container = get_container()
+        print(container.Config().ROOT_DIR)
         # url = "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token"
         # headers = {"Metadata-Flavor": "Google"}
         # response = requests.get(url, headers=headers).json()

@@ -1,7 +1,7 @@
 import schedule
 from api.server import Server
 from cli.command_interface import CommandInterface
-from config import get_config
+from model.config import get_config
 from model.gcp import GCPVertexAI
 
 from model.task import TaskQueueManager

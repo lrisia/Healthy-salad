@@ -46,7 +46,10 @@ class GCPVertexAI:
         self.__gcp_auth_token = GCPAuthToken(**response)
         self.__credential = Credentials(self.__gcp_auth_token.access_token)
 
-    def vertex_ai_predict(
+    def AuthToken(self) -> GCPAuthToken:
+        return self.__gcp_auth_token
+
+    def predict(
         self,
         data: list,
         project_number: Union[str, None] = None,

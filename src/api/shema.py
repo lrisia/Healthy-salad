@@ -1,3 +1,4 @@
+from re import M
 from typing import Any, Optional
 from pydantic import BaseModel
 from flask_openapi3 import Tag
@@ -15,6 +16,9 @@ class HttpStatus:
 
 class ApiTag:
     Util = Tag(name="Util", description="Util API")
+    GoogleCloudPlatform = Tag(name="GoogleCloudPlatform", description="Google Cloud Platform API")
+    Line = Tag(name="Line", description="Line API")
+    Model = Tag(name="Model", description="Model API")
 
 
 class DefaultResponse(BaseModel):
