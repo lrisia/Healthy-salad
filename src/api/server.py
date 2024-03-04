@@ -1,9 +1,9 @@
 import logging
+from typing import Union
 from flask import request
 from werkzeug.middleware.proxy_fix import ProxyFix
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 from werkzeug.exceptions import NotFound
-from api.controllers.gcp.get_auth_token import GetAuthTokenRoute
 from api.controllers.health_check_route import HealthCheckRoute
 from flask_openapi3 import Info
 from flask_openapi3 import OpenAPI, APIBlueprint
@@ -11,14 +11,18 @@ from api.controllers.line.line_webhook import PostLineWebhookRoute
 from api.routes import RouteList
 
 from config import get_config
+from model.gcp import CredentialManager
 
 
 class Server:
     server: OpenAPI
     __routes: RouteList
     __prefix: str = "/api/v1"
+    __credential_manager: Union[CredentialManager, None]
 
-    def __init__(self):
+    def __init__(self, credential_manager: Union[CredentialManager, None] = None):
+        self.__credential_manager = credential_manager
+
         # * Create server instance
         self.server = OpenAPI(
             __name__,
@@ -45,7 +49,6 @@ class Server:
                 get_config().LINE_CHANNEL_SECRET,
             )
         )
-        self.__routes.add(GetAuthTokenRoute())
 
         self.server.register_api(self.__routes.register_to_blueprint(api_blueprint))
 

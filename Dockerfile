@@ -18,4 +18,4 @@ EXPOSE 8000
 
 # CMD gunicorn --bind :$SERVER_PORT --workers 1 --threads 8 --timeout 0 main:app
 ENTRYPOINT [ "python3" ]
-CMD ["src/index.py", "pg"]
+CMD ["src/index.py", "api-start"]
