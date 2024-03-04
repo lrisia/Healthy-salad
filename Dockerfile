@@ -16,6 +16,5 @@ ADD --chown=python:nogroup ["src", "/app/src"]
 
 EXPOSE 8000
 
-D CFIO;
-=_";¸ENTRYPOINT [ "python3" ]
+ENTRYPOINT [ "python3" ]
 CMD ["src/index.py", "api-start"]
