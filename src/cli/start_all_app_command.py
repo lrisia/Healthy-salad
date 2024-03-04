@@ -11,3 +11,5 @@ class StartAllAppCommand(CommandInterface):
 
         app = Server(credential_manager=credential_manager)
         app.start(get_config().SERVER_PORT, debug=False)
+        
+        
