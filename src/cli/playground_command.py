@@ -9,6 +9,8 @@ from model.gcp import GCPAuthToken
 import google.auth
 import google.auth.transport.requests
 from google.auth import compute_engine
+import google.auth.transport.requests
+from google.oauth2.credentials import Credentials
 
 
 class PlaygroundCommand(CommandInterface):
@@ -16,14 +18,18 @@ class PlaygroundCommand(CommandInterface):
     def execute(self):
         print("Welcome to playground!")
 
-        cred = compute_engine.Credentials()
-        aiplatform.init(location="asia-southeast1",
-                        credentials=cred)
-        
+        config = get_config()
+
+        credentials, project_id = google.auth.default()
+        print(credentials.token)
+
         # url = "http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token"
         # headers = {"Metadata-Flavor": "Google"}
-        # gcp_response: GCPAuthToken = requests.get(url, headers=headers).json()
-        
+        # response: GCPAuthToken = requests.get(url, headers=headers).json()
+
+        aiplatform.init(
+            location="asia-southeast1", credentials=Credentials(credentials.token)
+        )
 
         def import_image(path: str, image_size: int = 224):
             img = cv2.resize(cv2.imread(path), (image_size, image_size))
@@ -39,10 +45,7 @@ class PlaygroundCommand(CommandInterface):
             result = endpoint.predict(instances=[instances])
             return result.predictions
 
-        config = get_config()
-        predict_img_path = (
-            os.path.join(config.ROOT_DIR, "example_image.jpg")
-        )
+        predict_img_path = os.path.join(config.ROOT_DIR, "example_image.jpg")
         predict_img = import_image(predict_img_path)
 
         # Make predictions using the custom trained model
