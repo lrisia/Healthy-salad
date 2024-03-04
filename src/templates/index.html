@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healthy Salad</title>
+</head>
+
+<body>
+  <div>Welcome</div>
+  <img src="">
+  <form action="/api/v1/model/predict" method="post" enctype="multipart/form-data">
+    <label for="img">Upload image</label>
+    <input type="file" onchange="previewFile()" id="img" name="img">
+    <input type="submit">
+  </form>
+</body>
+
+</html>
+
+<script type="text/javascript">
+  function previewFile() {
+    const preview = document.querySelector('img');
+    const file = document.querySelector('input[type=file]').files[0];
+    const reader = new FileReader();
+    reader.addEventListener("load", function () {
+      preview.src = reader.result; // show image in <img> tag
+    }, false);
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+</script>

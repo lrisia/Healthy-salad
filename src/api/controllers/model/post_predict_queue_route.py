@@ -7,7 +7,7 @@ from api.routes import ApiRouteInterface
 class PostPredictQueueRoute(ApiRouteInterface):
     def register(self, app):
         @app.post(
-            "/model/predict",
+            "/model/predict/queue",
             tags=[],
             description="Add a new prediction task to the queue.",
             responses={

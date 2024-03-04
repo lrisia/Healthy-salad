@@ -17,4 +17,4 @@ ADD --chown=python:nogroup ["src", "/app/src"]
 EXPOSE 8000
 
 ENTRYPOINT [ "python3" ]
-CMD ["src/index.py", "pg"]
+CMD ["src/index.py", "api-start"]

@@ -1,13 +1,12 @@
 from http import HTTPStatus
 from flask import make_response
-from flask_openapi3 import APIBlueprint
 
 from api.routes import ApiRouteInterface
 from api.shema import ApiTag, DefaultResponse, ErrorResponse
 
 
 class HealthCheckRoute(ApiRouteInterface):
-    def register(self, app: APIBlueprint):
+    def register(self, app):
         @app.get(
             "/healthcheck",
             tags=[ApiTag.Util],

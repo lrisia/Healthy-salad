@@ -12,8 +12,6 @@ import google.auth.transport.requests
 from google.auth import compute_engine
 import google.auth.transport.requests
 from google.oauth2.credentials import Credentials
-import firebase_admin
-from firebase_admin import firestore
 
 
 class PlaygroundCommand(CommandInterface):
@@ -38,15 +36,6 @@ class PlaygroundCommand(CommandInterface):
         # aiplatform.init(
         #     location="asia-southeast1", credentials=cred
         # )
-
-        firebase_admin.initialize_app()
-        print("Firebase initialized successfully!")
-        db = firestore.client()
-        
-        print("Writing to Firestore...")
-        doc_ref = db.collection("users").document("alovelace")
-        doc_ref.set({"first": "Ada", "last": "Lovelace", "born": 1815})
-        print("Write successful!")
 
         # def import_image(path: str, image_size: int = 224):
         #     img = cv2.resize(cv2.imread(path), (image_size, image_size))
