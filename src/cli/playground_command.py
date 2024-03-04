@@ -39,9 +39,7 @@ class PlaygroundCommand(CommandInterface):
         #     location="asia-southeast1", credentials=cred
         # )
 
-        firebase_admin.initialize_app(options={
-            "serviceAccountId": config.FIRESTORE_SERVICE_ACCOUNT
-        })
+        firebase_admin.initialize_app()
         print("Firebase initialized successfully!")
         db = firestore.client()
         
