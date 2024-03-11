@@ -19,8 +19,8 @@ class _Container:
         )
         self.__TaskQueueManager = TaskQueueManager()
         self.__LineConnection = LineConnection(
-                self.__Config.LINE_CHANNEL_SECRET,
                 self.__Config.LINE_LINE_CHANNEL_ACCESS_TOKEN,
+                self.__Config.LINE_CHANNEL_SECRET,
             )
 
     def Config(self) -> _Config:

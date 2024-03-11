@@ -19,6 +19,8 @@ class GCPVertexAI:
     __project_number: str
     __endpoint_id: str
 
+    __class_names = ["leaf_blight", "leaf_spot", "normal", "other", "worms_eat"]
+
     def __init__(
         self,
         custom_access_token: Union[str, None] = None,
@@ -63,4 +65,6 @@ class GCPVertexAI:
             endpoint_name=f"projects/{project_number}/locations/asia-southeast1/endpoints/{endpoint_id}"
         )
         result = endpoint.predict(instances=[data])
-        return result.predictions[0]
+        return self.__class_names[
+            result.predictions[0].index(max(result.predictions[0]))
+        ]

@@ -53,15 +53,15 @@ class Server:
         self.__routes.add(AuthTokenGetRoute(self.__container.GCPVertexAI()))
 
         # Line
-        self.__routes.add(LineWebhookPostRoute(self.__container.LineConnection()))
+        self.__routes.add(
+            LineWebhookPostRoute(
+                self.__container.LineConnection(), self.__container.GCPVertexAI()
+            ),
+        )
 
         # Model
         self.__routes.add(ModelGetPageRoute())
-        self.__routes.add(
-            ModelPredictPostRoute(
-                self.__container.GCPVertexAI(), self.__container.TaskQueueManager()
-            )
-        )
+        self.__routes.add(ModelPredictPostRoute(self.__container.GCPVertexAI()))
 
         self.server.register_api(self.__routes.register_to_blueprint(api_blueprint))
         self.server.register_blueprint(self.__routes.register_to_app(page_blueprint))

@@ -7,6 +7,7 @@ from api.routes import ApiRouteInterface
 from api.shema import ApiTag, ErrorResponse, HttpStatus
 from model.gcp import GCPVertexAI
 from model.task import TaskQueueManager
+from utils.image import preprocess_image
 
 
 class ModelPredictPostRoute(ApiRouteInterface):
@@ -16,10 +17,8 @@ class ModelPredictPostRoute(ApiRouteInterface):
     def __init__(
         self,
         vertex_ai: GCPVertexAI,
-        queue_manager: TaskQueueManager,
     ):
         self.__vertex_ai = vertex_ai
-        self.__queue_manager = queue_manager
 
     def register(self, app):
         @app.post(
@@ -37,7 +36,7 @@ class ModelPredictPostRoute(ApiRouteInterface):
                 uploaded_file = request.files["img"]
                 nparr = np.frombuffer(uploaded_file.stream.read(), np.uint8)
                 image_np = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-                image = self.__queue_manager.load_image(image_np)
+                image = preprocess_image(image_np)
                 answer = self.__vertex_ai.predict(image.tolist())
                 return make_response(
                     ModelResponse(message=None, answers=answer).model_dump(), 200
