@@ -35,16 +35,15 @@ class LineWebhookPostRoute(ApiRouteInterface):
             # get request body as text
             body = request.get_data(as_text=True)
             print("Request body: " + body)
+            body_json = json.loads(body)
             # handle webhook body
             try:
-                body_json = json.loads(body)
                 if (
                     len(body_json["events"]) > 0
                     and body_json["events"][0]["message"]["type"] == "image"
                 ):
                     image_id = body_json["events"][0]["message"]["id"]
                     user_id = body_json["events"][0]["source"]["userId"]
-                    # self.__queue_manager.add(Task(image_id=image_id, user_id=user_id))
                     self.__line_connection.handler.handle(body, signature)
 
                     # Preprocess image
@@ -63,11 +62,13 @@ class LineWebhookPostRoute(ApiRouteInterface):
                 current_app.logger.info(
                     "Invalid signature. Please check your channel access token/channel secret."
                 )
+                self.__line_connection.send_message(user_id, "ประเมินผลล้มเหลวเนื่องจากมีข้อผิดพลาดเกี่ยวกับไลน์")
                 print(e.message)
-                abort(400)
+                return "OK", 200
             except Exception as e:
+                self.__line_connection.send_message(user_id, "ประเมินผลล้มเหลวเนื่องจากมีข้อผิดพลาดบางอย่าง กรุณาลองใหม่ภายหลัง")
                 print(e)
-                abort(400)
+                return "OK", 200
 
             return "OK", 200
 
