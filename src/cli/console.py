@@ -4,7 +4,6 @@ import click
 from cli.playground_command import PlaygroundCommand
 
 from cli.server_command import ListAllRouteCommand, StartApiServerCommand
-from cli.start_all_app_command import StartAllAppCommand
 from model.config import get_config
 from model.container import get_container
 from model.gcp import GCPVertexAI
@@ -40,19 +39,3 @@ def start_server(ngrok: bool) -> None:
 def route_list() -> None:
     list_all_route_command = ListAllRouteCommand()
     list_all_route_command.execute(get_container())
-
-
-@console.command(
-    "start:all", short_help="Start all application. Run in full mode. API and Cron"
-)
-@click.option(
-    "-N",
-    "--ngrok",
-    default=False,
-    is_flag=True,
-    type=bool,
-    help="Use this option to start the server with ngrok ingress for get temporary public domain name.",
-)
-def start_all(ngrok: bool) -> None:
-    start_all_app_command = StartAllAppCommand(ngrok)
-    start_all_app_command.execute(get_container())
