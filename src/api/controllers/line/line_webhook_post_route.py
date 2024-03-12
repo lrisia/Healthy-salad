@@ -88,7 +88,7 @@ class LineWebhookPostRoute(ApiRouteInterface):
                 line_bot_api.reply_message_with_http_info(
                     ReplyMessageRequest(
                         reply_token=event.reply_token,
-                        messages=[TextMessage(text=event.message.text)],  # type: ignore
+                        messages=[TextMessage(self.__line_connection.handle_image(text=event.message.text))],  # type: ignore
                     )
                 )
 
