@@ -42,6 +42,11 @@ class LineWebhookPostRoute(ApiRouteInterface):
                     len(body_json["events"]) > 0
                     and body_json["events"][0]["message"]["type"] == "image"
                 ):
+                    if (
+                        body_json["events"][0]["deliveryContext"]["isRedelivery"]
+                        == True
+                    ):
+                        return "OK", 200
                     image_id = body_json["events"][0]["message"]["id"]
                     user_id = body_json["events"][0]["source"]["userId"]
                     self.__line_connection.handler.handle(body, signature)
@@ -50,11 +55,11 @@ class LineWebhookPostRoute(ApiRouteInterface):
                     data = self.__line_connection.get_content(image_id)
                     image_np = cv2.imdecode(data, cv2.IMREAD_COLOR)
                     image = preprocess_image(image_np)
-                    
+
                     # Predict
                     self.__vertex_ai.init_aiplatform()
                     answer = self.__vertex_ai.predict(image.tolist())
-                    
+
                     self.__line_connection.send_message(user_id, answer)
                 else:
                     self.__line_connection.handler.handle(body, signature)
@@ -62,11 +67,15 @@ class LineWebhookPostRoute(ApiRouteInterface):
                 current_app.logger.info(
                     "Invalid signature. Please check your channel access token/channel secret."
                 )
-                self.__line_connection.send_message(user_id, "ประเมินผลล้มเหลวเนื่องจากมีข้อผิดพลาดเกี่ยวกับไลน์")
+                self.__line_connection.send_message(
+                    user_id, "ประเมินผลล้มเหลวเนื่องจากมีข้อผิดพลาดเกี่ยวกับไลน์"
+                )
                 print(e.message)
                 return "OK", 200
             except Exception as e:
-                self.__line_connection.send_message(user_id, "ประเมินผลล้มเหลวเนื่องจากมีข้อผิดพลาดบางอย่าง กรุณาลองใหม่ภายหลัง")
+                self.__line_connection.send_message(
+                    user_id, "ประเมินผลล้มเหลวเนื่องจากมีข้อผิดพลาดบางอย่าง กรุณาลองใหม่ภายหลัง"
+                )
                 print(e)
                 return "OK", 200
 
@@ -82,7 +91,7 @@ class LineWebhookPostRoute(ApiRouteInterface):
                         messages=[TextMessage(text=event.message.text)],  # type: ignore
                     )
                 )
-                
+
         @self.__line_connection.handler.add(MessageEvent, message=ImageMessageContent)
         def handle_image(event):
             with ApiClient(self.__line_connection.configuration) as api_client:
@@ -90,6 +99,6 @@ class LineWebhookPostRoute(ApiRouteInterface):
                 line_bot_api.reply_message_with_http_info(
                     ReplyMessageRequest(
                         reply_token=event.reply_token,
-                        messages=[TextMessage(text="กำลังประมวลผล")],  # type: ignore
+                        messages=[TextMessage(text="กำลังประมวลผล\nหากไม่สำเร็จจะลองอีกครั้งอัตโนมัติ")],  # type: ignore
                     )
                 )
