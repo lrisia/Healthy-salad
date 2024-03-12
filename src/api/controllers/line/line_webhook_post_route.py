@@ -99,6 +99,6 @@ class LineWebhookPostRoute(ApiRouteInterface):
                 line_bot_api.reply_message_with_http_info(
                     ReplyMessageRequest(
                         reply_token=event.reply_token,
-                        messages=[TextMessage(text="กำลังประมวลผล\nหากไม่สำเร็จจะลองอีกครั้งอัตโนมัติ")],  # type: ignore
+                        messages=[TextMessage(text="กำลังประมวลผล")],  # type: ignore
                     )
                 )
